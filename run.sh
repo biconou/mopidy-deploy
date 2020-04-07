@@ -5,7 +5,7 @@ docker run --rm \
     -p 6600:6600 -p 6680:6680 \
     -v "/mnt/DATA/music:/var/lib/mopidy/media:ro" \
     -v "$PWD/local:/var/lib/mopidy/local" \
-    wernight/mopidy \
+    ivdata/mopidy \
     mopidy
 
 
