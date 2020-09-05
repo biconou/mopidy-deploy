@@ -5,6 +5,8 @@ services:
   mopidy:
     build:
       context: mopidy/
+      args:
+        - SOUNDCLOUD_KEY=$SOUNDCLOUD_KEY
     volumes:
       - /mnt/DATA/music:/var/lib/mopidy/media:ro
       - $PWD/local:/var/lib/mopidy/local

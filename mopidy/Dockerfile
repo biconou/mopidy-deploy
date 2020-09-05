@@ -1,5 +1,14 @@
-FROM wernight/mopidy
+FROM ivdata/mopidy
+
+ARG SOUNDCLOUD_KEY
 
 COPY .asoundrc /etc/asound.conf
 
-COPY mopidy.conf /config/mopidy.conf
+COPY mopidy.conf /root/.config/mopidy/mopidy.conf
+
+RUN sed -i "s/SOUNDCLOUD_KEY/${SOUNDCLOUD_KEY}/g" /root/.config/mopidy/mopidy.conf
+
+USER root
+
+RUN apt-get update ; \
+    apt install mopidy-soundcloud;

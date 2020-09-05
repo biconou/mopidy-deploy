@@ -1,0 +1,21 @@
+FROM multiarch/ubuntu-debootstrap:armhf-xenial-slim
+
+ARG SOUNDCLOUD_KEY
+
+RUN  sed -i.bak "1 s/^.*$/deb http:\/\/ports\.ubuntu\.com\/ubuntu-ports xenial main restricted universe multiverse/" /etc/apt/sources.list
+RUN  apt-get update
+RUN  apt-get install -y wget ca-certificates
+RUN  wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add -
+RUN  wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/stretch.list
+RUN  apt-get update
+RUN  apt-get install -y python-pip mopidy libspotify12 python-spotify libxml2-dev libxslt1-dev zlib1g-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-bad gstreamer1.0-plugins-good gstreamer1.0-plugins-ugly
+RUN  apt-get remove -y python-pyasn1
+RUN  pip install Mopidy-TuneIn Mopidy-GMusic Mopidy-Spotify Mopidy-Moped Mopidy-Party Mopidy-Soundcloud
+
+COPY mopidy.conf /root/.config/mopidy_default.conf
+RUN sed -i "s/SOUNDCLOUD_KEY/${SOUNDCLOUD_KEY}/g" /root/.config/mopidy_default.conf
+COPY .asoundrc /etc/asound.conf
+COPY mopidy.sh /usr/local/bin/mopidy.sh
+
+EXPOSE 6600 6680
+ENTRYPOINT ["/usr/local/bin/mopidy.sh"]

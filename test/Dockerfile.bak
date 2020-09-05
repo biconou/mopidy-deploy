@@ -1,0 +1,18 @@
+FROM arm32v7/ubuntu:bionic
+
+ARG SOUNDCLOUD_KEY
+
+USER root
+
+RUN apt update; \
+    apt -y install wget
+
+RUN wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add -; \
+    wget -q -O /etc/apt/sources.list.d/mopidy.list https://apt.mopidy.com/buster.list; \
+    apt update; \
+    apt -y install mopidy
+
+RUN apt -y install python3.6
+
+
+CMD mopidy
