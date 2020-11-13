@@ -2,7 +2,9 @@ FROM multiarch/ubuntu-debootstrap:armhf-xenial-slim
 
 ARG SOUNDCLOUD_KEY
 
-RUN  sed -i.bak "1 s/^.*$/deb http:\/\/ports\.ubuntu\.com\/ubuntu-ports xenial main restricted universe multiverse/" /etc/apt/sources.list
+USER root 
+
+#RUN  sed -i.bak "1 s/^.*$/deb http:\/\/ports\.ubuntu\.com\/ubuntu-ports xenial main restricted universe multiverse/" /etc/apt/sources.list
 RUN  apt-get update
 RUN  apt-get install -y wget ca-certificates
 RUN  wget -q -O - https://apt.mopidy.com/mopidy.gpg | apt-key add -

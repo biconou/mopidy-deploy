@@ -5,10 +5,12 @@ services:
   mopidy:
     build:
       context: mopidy/
+      dockerfile: Dockerfile.${HOSTNAME}
       args:
         - SOUNDCLOUD_KEY=$SOUNDCLOUD_KEY
+        - HOSTNAME=$HOSTNAME
     volumes:
-      - /mnt/DATA/music:/var/lib/mopidy/media:ro
+      - ${MUSIC_DIR}:/var/lib/mopidy/media:ro
       - $PWD/local:/var/lib/mopidy/local
     ports:
       - "6600:6600"
