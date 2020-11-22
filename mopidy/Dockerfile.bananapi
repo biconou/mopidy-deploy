@@ -2,7 +2,7 @@ FROM ivdata/mopidy
 
 ARG SOUNDCLOUD_KEY
 
-COPY .asoundrc /etc/asound.conf
+COPY .asoundrc.bananpi /etc/asound.conf
 
 COPY mopidy.conf /root/.config/mopidy/mopidy.conf
 
