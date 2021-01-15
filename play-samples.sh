@@ -1,8 +1,10 @@
 #!/bin/bash
 
-ffprobe ./samples/a2002011001-e02.wav
+SAMPLE_FILE=./samples/naim-test-1-wav-16-44100.wav
 
-nohup aplay ./samples/a2002011001-e02.wav  \
+ffprobe ${SAMPLE_FILE}
+
+nohup aplay ${SAMPLE_FILE}  \
     >/dev/null 2>&1 \
     &
 
