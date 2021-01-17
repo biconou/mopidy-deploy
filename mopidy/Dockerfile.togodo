@@ -33,6 +33,8 @@ COPY .asoundrc.togodo /etc/asound.conf
 
 COPY mopidy.conf /root/.config/mopidy/mopidy.conf
 
+COPY scan.sh /root/
+
 RUN sed -i "s/SOUNDCLOUD_KEY/${SOUNDCLOUD_KEY}/g" /root/.config/mopidy/mopidy.conf
 
 EXPOSE 6600 6680

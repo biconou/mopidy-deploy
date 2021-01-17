@@ -3,6 +3,7 @@ version: '2'
 services:
 
   mopidy:
+    restart: unless-stopped
     build:
       context: mopidy/
       dockerfile: Dockerfile.${HOSTNAME}
